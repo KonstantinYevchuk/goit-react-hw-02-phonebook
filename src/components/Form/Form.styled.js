@@ -1,7 +1,13 @@
 import styled from '@emotion/styled';
 
 export const FormContainer = styled.form`
-    padding: 40px 20px;
+    padding: 25px 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 340px;
 `;
 export const Label = styled.label`
     font-size: 18px;
