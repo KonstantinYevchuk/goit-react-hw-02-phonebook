@@ -5,12 +5,32 @@ import { ContactsList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
 import { Container, MainTitle, Title, ErrorText } from './App.styled';
 
+const STORAGE = "contact";
 
 export class App extends Component {
   state = {
     contacts: [],
     filter: ''
   }
+  componentDidMount() {
+    const savedContacts = localStorage.getItem(STORAGE);
+    if(savedContacts !== null) {
+      const parsedContacts = JSON.parse(savedContacts)
+      this.setState({
+        contacts: parsedContacts
+      })
+      return
+    }
+    this.setState({
+      contacts: []
+    })
+  }
+  componentDidUpdate(_, prevState) {
+    if(prevState.contacts !== this.state.contacts) {
+      localStorage.setItem(STORAGE, JSON.stringify(this.state.contacts))
+    }
+  }
+
   handleSubmitForm = ({name, number}) => {
           const {contacts} = this.state
           const newContact = {
